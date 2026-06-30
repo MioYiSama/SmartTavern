@@ -1,3 +1,5 @@
 allowBuilds:
   "@openrouter/sdk": true
   sharp: true
+
+minimumReleaseAge: 0
