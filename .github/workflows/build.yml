@@ -21,4 +21,5 @@ jobs:
         with:
           name: SmartTavern
           path: .output/**/*
+          include-hidden-files: true
           compression-level: 9
