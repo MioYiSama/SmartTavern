@@ -1,6 +1,7 @@
 {
   "name": "smart-tavern",
   "version": "0.0.0",
+  "description": "A fork of SillyTavern.",
   "license": "AGPL-3.0",
   "repository": {
     "type": "git",
@@ -14,7 +15,8 @@
     "build:docker": "docker build -t mioyisama/smart-tavern .",
     "preview": "vp preview",
     "lint": "vp lint",
-    "fmt": "vp fmt"
+    "fmt": "vp fmt",
+    "pwa-assets": "pwa-assets-generator --preset minimal-2023 public/logo.png"
   },
   "dependencies": {
     "@base-ui/react": "^1.6.0",
@@ -45,6 +47,7 @@
     "@types/node": "^26.0.1",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
+    "@vite-pwa/assets-generator": "^1.0.2",
     "@vitejs/plugin-react": "^6.0.3",
     "@vitejs/plugin-rsc": "^0.5.27",
     "babel-plugin-react-compiler": "^1.0.0",

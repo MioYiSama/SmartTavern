@@ -13,7 +13,6 @@ RUN --mount=type=cache,id=pnpm,target=/root/.local/share/pnpm/store \
 COPY . .
 RUN pnpm build
 
-# ---
 FROM gcr.io/distroless/nodejs26-debian13
 
 WORKDIR /app
