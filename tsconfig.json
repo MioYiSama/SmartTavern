@@ -7,6 +7,10 @@
     "skipLibCheck": true,
     "strictNullChecks": true,
 
+    "types": ["node", "vite-plus/client", "vite-plugin-pwa/client", "unplugin-icons/types/react"],
+    "paths": {
+      "@/*": ["./src/*"]
+    },
     // TanStack Start: Enabling `verbatimModuleSyntax` can result in server bundles leaking into client bundles. It is recommended to keep this option disabled.
     "verbatimModuleSyntax": false,
 

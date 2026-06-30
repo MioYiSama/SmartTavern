@@ -4,7 +4,8 @@ import { Outlet, createRootRoute, HeadContent, Scripts } from "@tanstack/react-r
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { StrictMode } from "react";
 
-import { getLocale } from "../paraglide/runtime";
+import { PWARegister } from "@/components/PWARegister";
+import { getLocale } from "@/paraglide/runtime";
 
 import css from "../app.css?url";
 
@@ -19,6 +20,10 @@ export const Route = createRootRoute({
         content: "width=device-width, initial-scale=1",
       },
       {
+        name: "theme-color",
+        content: "#ffffff",
+      },
+      {
         title: "SmartTavern",
       },
     ],
@@ -31,6 +36,17 @@ export const Route = createRootRoute({
         rel: "icon",
         href: "/favicon.ico",
       },
+      // VitePWA injects this into a static index.html, which a TanStack Start
+      // SSR app does not have, so the manifest must be linked manually.
+      // Without it Chrome cannot mark the app as installable.
+      {
+        rel: "manifest",
+        href: "/manifest.webmanifest",
+      },
+      {
+        rel: "apple-touch-icon",
+        href: "/apple-icon-192x192.png",
+      },
     ],
   }),
   component() {
@@ -42,6 +58,7 @@ export const Route = createRootRoute({
         <body>
           <StrictMode>
             <Outlet />
+            <PWARegister />
             <TanStackDevtools
               plugins={[
                 {

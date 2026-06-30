@@ -6,8 +6,12 @@ import { useChat, fetchServerSentEvents } from "@tanstack/ai-react";
 import type { UIMessage } from "@tanstack/ai-react";
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
+import IconBot from "~icons/lucide/bot";
+import IconMessageCircle from "~icons/lucide/message-circle";
+import IconSend from "~icons/lucide/send";
+import IconSquare from "~icons/lucide/square";
 
-import { m } from "../paraglide/messages";
+import { m } from "@/paraglide/messages";
 
 export const Route = createFileRoute("/")({
   component: RouteComponent,
@@ -48,24 +52,40 @@ function RouteComponent() {
     <div className="mx-auto flex h-dvh max-w-2xl flex-col gap-4 p-4">
       <div className="flex flex-1 flex-col gap-3 overflow-y-auto">
         {messages.length === 0 && (
-          <p className="m-auto text-sm text-gray-400">{m.chat_empty_state()}</p>
+          <div className="m-auto flex flex-col items-center gap-2 text-gray-400">
+            <IconMessageCircle className="size-8" />
+            <p className="text-sm">{m.chat_empty_state()}</p>
+          </div>
         )}
         {messages.map((message: UIMessage) => (
           <div
             key={message.id}
             className={
               message.role === "user"
-                ? "max-w-[85%] self-end rounded-2xl rounded-br-sm bg-blue-600 px-4 py-2 text-white"
-                : "max-w-[85%] self-start rounded-2xl rounded-bl-sm bg-gray-100 px-4 py-2 text-gray-900"
+                ? "flex items-end justify-end gap-2"
+                : "flex items-end justify-start gap-2"
             }
           >
-            {message.parts.map((part, i) =>
-              part.type === "text" ? (
-                <span key={i} className="whitespace-pre-wrap">
-                  {part.content}
-                </span>
-              ) : null,
+            {message.role !== "user" && (
+              <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-gray-100 text-gray-500">
+                <IconBot className="size-5" />
+              </div>
             )}
+            <div
+              className={
+                message.role === "user"
+                  ? "max-w-[85%] rounded-2xl rounded-br-sm bg-blue-600 px-4 py-2 text-white"
+                  : "max-w-[85%] rounded-2xl rounded-bl-sm bg-gray-100 px-4 py-2 text-gray-900"
+              }
+            >
+              {message.parts.map((part, i) =>
+                part.type === "text" ? (
+                  <span key={i} className="whitespace-pre-wrap">
+                    {part.content}
+                  </span>
+                ) : null,
+              )}
+            </div>
           </div>
         ))}
       </div>
@@ -91,16 +111,18 @@ function RouteComponent() {
         {isLoading ? (
           <Button
             onClick={stop}
-            className="h-11 cursor-pointer rounded-xl bg-gray-900 px-5 font-medium text-white hover:bg-gray-700"
+            className="flex h-11 cursor-pointer items-center gap-2 rounded-xl bg-gray-900 px-5 font-medium text-white hover:bg-gray-700"
           >
+            <IconSquare className="size-4" />
             {m.chat_stop()}
           </Button>
         ) : (
           <Button
             onClick={handleSubmit}
             disabled={!input.trim()}
-            className="h-11 cursor-pointer rounded-xl bg-blue-600 px-5 font-medium text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
+            className="flex h-11 cursor-pointer items-center gap-2 rounded-xl bg-blue-600 px-5 font-medium text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
           >
+            <IconSend className="size-4" />
             {m.chat_send()}
           </Button>
         )}
