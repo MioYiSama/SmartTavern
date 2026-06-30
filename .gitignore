@@ -1,0 +1,6 @@
+.output
+.tanstack
+.vscode
+.wrangler
+node_modules
+.env

@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "moduleResolution": "bundler",
+    "module": "esnext",
+    "target": "esnext",
+    "skipLibCheck": true,
+    "strictNullChecks": true,
+
+    // TanStack Start: Enabling `verbatimModuleSyntax` can result in server bundles leaking into client bundles. It is recommended to keep this option disabled.
+    "verbatimModuleSyntax": false,
+
+    // paraglide js
+    "allowJs": true,
+    "noEmit": true
+  }
+}

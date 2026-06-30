@@ -1,0 +1,52 @@
+{
+  "name": "smart-tavern",
+  "version": "0.0.0",
+  "license": "AGPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MioYiSama/SmartTavern.git"
+  },
+  "type": "module",
+  "scripts": {
+    "dev": "vp dev",
+    "build": "vp build",
+    "build:cf": "NITRO_PRESET=cloudflare_module vp build",
+    "build:docker": "docker build -t mioyisama/smart-tavern .",
+    "preview": "vp preview",
+    "lint": "vp lint",
+    "fmt": "vp fmt"
+  },
+  "dependencies": {
+    "@base-ui/react": "^1.6.0",
+    "@tanstack/ai": "^0.38.0",
+    "@tanstack/ai-openrouter": "^0.15.4",
+    "@tanstack/ai-react": "^0.16.0",
+    "@tanstack/react-router": "^1.170.16",
+    "@tanstack/react-start": "^1.168.26",
+    "nitro": "3.0.260610-beta",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
+  },
+  "devDependencies": {
+    "@babel/core": "^8.0.1",
+    "@inlang/cli": "^3.0.0",
+    "@inlang/paraglide-js": "^2.20.2",
+    "@rolldown/plugin-babel": "^0.2.3",
+    "@tailwindcss/vite": "^4.3.1",
+    "@tanstack/devtools-vite": "^0.8.1",
+    "@tanstack/react-ai-devtools": "^0.2.62",
+    "@tanstack/react-devtools": "^0.10.8",
+    "@tanstack/react-router-devtools": "^1.167.0",
+    "@types/babel__core": "^7.20.5",
+    "@types/node": "^26.0.1",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.3",
+    "@vitejs/plugin-rsc": "^0.5.27",
+    "babel-plugin-react-compiler": "^1.0.0",
+    "tailwindcss": "^4.3.1",
+    "typescript": "^6.0.3",
+    "vite-plus": "^0.2.1"
+  },
+  "packageManager": "pnpm@11.9.0+sha512.bd682d5d03fe525ef7c9fd6780c6884d1e756ac4c9c9fe00c538782824310dcf90e3ddc4f53835f06dfaebd5085e41855e0bcbb3b60de2ac5bbab89e5036f03b"
+}
