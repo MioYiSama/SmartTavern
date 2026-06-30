@@ -20,5 +20,5 @@ jobs:
       - uses: actions/upload-artifact@v7
         with:
           name: SmartTavern
-          path: .output
+          path: .output/**/*
           compression-level: 9
