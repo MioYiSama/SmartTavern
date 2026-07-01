@@ -1,0 +1,4 @@
+[submodule "SillyTavern"]
+	path = SillyTavern
+	url = https://github.com/SillyTavern/SillyTavern
+	shallow = true

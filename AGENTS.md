@@ -1,6 +1,8 @@
 - when using TanStack libraries, load skills first.
-- use Base UI (<https://base-ui.com/llms.txt>), DaisyUI v5 and TailwindCSS v4
+- use Base UI (<https://base-ui.com/llms.txt>), DaisyUI v5 and TailwindCSS v4.
+- Use unplugin-icons and lucide (for general purpose) / simple-icons (for popular brands).
 - Streamdown is a React component library that makes rendering streaming Markdown content seamless and beautiful. Built specifically for AI-powered applications, it handles the unique challenges that arise when Markdown is tokenized and streamed in real-time. <https://streamdown.ai/llms.txt>
+- Treat the folder `./SillyTavern/` as read-only.
 
 <!-- intent-skills:start -->
 

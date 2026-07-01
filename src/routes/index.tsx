@@ -7,8 +7,6 @@ import { createFileRoute } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import { useState } from "react";
 import IconBot from "~icons/lucide/bot";
-
-import "katex/dist/katex.min.css";
 import IconMessageCircle from "~icons/lucide/message-circle";
 import IconSend from "~icons/lucide/send";
 import IconSquare from "~icons/lucide/square";

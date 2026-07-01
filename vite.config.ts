@@ -31,7 +31,7 @@ export default defineConfig({
       jsx: "react",
     }),
     react(),
-    babel({ presets: [reactCompilerPreset()] }),
+    babel({ presets: [reactCompilerPreset()] }) as any,
     tanstackStartCookies(),
     VitePWA({
       registerType: "autoUpdate",
