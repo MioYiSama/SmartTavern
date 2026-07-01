@@ -47,22 +47,9 @@ export default defineConfig({
         background_color: "#ffffff",
         display: "standalone",
         icons: [
-          {
-            src: "/pwa-64x64.png",
-            sizes: "64x64",
-            type: "image/png",
-          },
-          {
-            src: "/pwa-192x192.png",
-            sizes: "192x192",
-            type: "image/png",
-          },
-          {
-            src: "/pwa-512x512.png",
-            sizes: "512x512",
-            type: "image/png",
-            purpose: "any",
-          },
+          { src: "/pwa-64x64.png", sizes: "64x64", type: "image/png" },
+          { src: "/pwa-192x192.png", sizes: "192x192", type: "image/png" },
+          { src: "/pwa-512x512.png", sizes: "512x512", type: "image/png", purpose: "any" },
           {
             src: "/maskable-icon-512x512.png",
             sizes: "512x512",
@@ -76,9 +63,6 @@ export default defineConfig({
   resolve: {
     tsconfigPaths: true,
     alias: {
-      // shiki's `./wasm` export offers a raw `onig.wasm` (via the `unwasm`
-      // condition) that rolldown's wasm loader can't bundle. Point it at the
-      // JS-inlined oniguruma engine instead (shiki's own `default` fallback).
       "shiki/wasm": "@shikijs/engine-oniguruma/wasm-inlined",
     },
   },
@@ -98,7 +82,7 @@ export default defineConfig({
     },
   },
   fmt: {
-    ignorePatterns: ["src/routeTree.gen.ts"],
+    ignorePatterns: ["src/routeTree.gen.ts", "pnpm-lock.yaml"],
     sortImports: true,
     sortPackageJson: true,
     sortTailwindcss: true,

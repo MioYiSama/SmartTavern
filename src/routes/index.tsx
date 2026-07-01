@@ -1,5 +1,4 @@
 import { Button } from "@base-ui/react/button";
-import { Input } from "@base-ui/react/input";
 import { chat, toServerSentEventsResponse } from "@tanstack/ai";
 import { openRouterText } from "@tanstack/ai-openrouter";
 import { useChat, fetchServerSentEvents } from "@tanstack/ai-react";
@@ -95,7 +94,7 @@ function RouteComponent() {
                       </div>
                     </div>
                   )}
-                  <div className={`chat-bubble ${isUser ? "chat-bubble-primary" : ""}`}>
+                  <div className={`chat-bubble ${isUser ? "chat-bubble-secondary" : ""}`}>
                     <Markdown mode={mode} content={text} />
                   </div>
                 </div>
@@ -111,9 +110,10 @@ function RouteComponent() {
         </div>
       )}
 
-      <div className="flex items-center gap-2">
-        <Input
-          className="input flex-1"
+      <div className="flex items-end gap-2">
+        <textarea
+          rows={1}
+          className="textarea max-h-40 flex-1 resize-none"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => {

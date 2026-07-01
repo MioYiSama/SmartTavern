@@ -21,7 +21,11 @@ const SOURCE_MAP_LINE = /^\/\/# sourceMappingURL=.*$\n?/gm;
 const rootDir = join(dirname(fileURLToPath(import.meta.url)), "..");
 
 function run(cmd, args, opts = {}) {
-  return execFileSync(cmd, args, { encoding: "utf8", stdio: ["ignore", "pipe", "inherit"], ...opts });
+  return execFileSync(cmd, args, {
+    encoding: "utf8",
+    stdio: ["ignore", "pipe", "inherit"],
+    ...opts,
+  });
 }
 
 function resolveVersions() {
@@ -72,7 +76,9 @@ for (const version of versions) {
     run("pnpm", ["patch", spec, "--edit-dir", editDir]);
 
     const { filesChanged, linesRemoved } = stripSourceMaps(editDir);
-    console.log(`Removed ${linesRemoved} sourceMappingURL comment(s) across ${filesChanged} file(s).`);
+    console.log(
+      `Removed ${linesRemoved} sourceMappingURL comment(s) across ${filesChanged} file(s).`,
+    );
 
     if (linesRemoved === 0) {
       console.log("Nothing to patch — package has no broken source maps. Skipping commit.");

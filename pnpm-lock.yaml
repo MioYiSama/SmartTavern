@@ -63,6 +63,9 @@ importers:
       '@babel/core':
         specifier: ^8.0.1
         version: 8.0.1
+      '@catppuccin/daisyui':
+        specifier: ^2.1.1
+        version: 2.1.1(tailwindcss@4.3.2)
       '@iconify-json/lucide':
         specifier: ^1.2.115
         version: 1.2.115
@@ -756,6 +759,14 @@ packages:
 
   '@canvas/image-data@1.1.0':
     resolution: {integrity: sha512-QdObRRjRbcXGmM1tmJ+MrHcaz1MftF2+W7YI+MsphnsCrmtyfS0d5qJbk0MeSbUeyM/jCb0hmnkXPsy026L7dA==}
+
+  '@catppuccin/daisyui@2.1.1':
+    resolution: {integrity: sha512-PrZttjj8kwfDBJ34sR+DN25Xtjvxx4T5p8uu/iiGYZR8UOsNwzMlO/alYDBwwTOLzP1NKLNRax09kCT39+QM+A==}
+    peerDependencies:
+      tailwindcss: ^4.0.17
+
+  '@catppuccin/palette@1.8.0':
+    resolution: {integrity: sha512-qXhwKiLzQomUygUJYB36YAFgs+dET5bIocfkiaFIatQF5Pwc7L112TlF9P8J5Oqs3x3XTjYSucG0ncHXSCuk7Q==}
 
   '@chevrotain/types@11.1.2':
     resolution: {integrity: sha512-U+HFai5+zmJCkK86QsaJtoITlboZHBqrVketcO2ROv865xfCMSFpELQoz1GkX5GzME8pTa+3kbKrZHQtI0gdbw==}
@@ -5967,6 +5978,13 @@ snapshots:
   '@braintree/sanitize-url@7.1.2': {}
 
   '@canvas/image-data@1.1.0': {}
+
+  '@catppuccin/daisyui@2.1.1(tailwindcss@4.3.2)':
+    dependencies:
+      '@catppuccin/palette': 1.8.0
+      tailwindcss: 4.3.2
+
+  '@catppuccin/palette@1.8.0': {}
 
   '@chevrotain/types@11.1.2': {}
 
