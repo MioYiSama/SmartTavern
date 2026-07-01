@@ -1,3 +1,7 @@
+# SillyTavern is pinned to tag 1.18.0 (commit 51ad27fb).
+# Git submodules pin by commit, not tag name — to move to a new tag:
+#   cd SillyTavern && git fetch --tags && git checkout <tag>
+#   cd .. && git add SillyTavern && git commit
 [submodule "SillyTavern"]
 	path = SillyTavern
 	url = https://github.com/SillyTavern/SillyTavern
