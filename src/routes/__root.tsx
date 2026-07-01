@@ -1,15 +1,24 @@
 import { aiDevtoolsPlugin } from "@tanstack/react-ai-devtools";
 import { TanStackDevtools } from "@tanstack/react-devtools";
-import { Outlet, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
+import { Outlet, createRootRoute, HeadContent, Scripts, redirect } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { StrictMode } from "react";
 import { useRegisterSW } from "virtual:pwa-register/react";
 
-import { getLocale } from "@/paraglide/runtime";
+import { getLocale, shouldRedirect } from "@/paraglide/runtime";
 
 import css from "../app.css?url";
 
 export const Route = createRootRoute({
+  beforeLoad: async () => {
+    if (typeof window === "undefined") return;
+
+    const decision = await shouldRedirect({ url: window.location.href });
+
+    if (decision.redirectUrl) {
+      throw redirect({ href: decision.redirectUrl.href });
+    }
+  },
   head: () => ({
     meta: [
       {

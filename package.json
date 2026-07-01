@@ -26,6 +26,7 @@
   "dependencies": {
     "@base-ui/react": "^1.6.0",
     "@electric-sql/pglite": "^0.5.3",
+    "@electric-sql/pglite-pgvector": "^0.0.4",
     "@streamdown/cjk": "^1.0.3",
     "@streamdown/code": "^1.1.1",
     "@streamdown/math": "^1.0.2",

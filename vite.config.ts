@@ -74,6 +74,9 @@ export default defineConfig({
   preview: {
     port: 8000,
   },
+  optimizeDeps: {
+    exclude: ["@electric-sql/pglite"],
+  },
   build: {
     modulePreload: {
       polyfill: false,

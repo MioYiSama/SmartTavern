@@ -17,6 +17,9 @@ importers:
       '@electric-sql/pglite':
         specifier: ^0.5.3
         version: 0.5.3
+      '@electric-sql/pglite-pgvector':
+        specifier: ^0.0.4
+        version: 0.0.4(@electric-sql/pglite@0.5.3)
       '@streamdown/cjk':
         specifier: ^1.0.3
         version: 1.0.3(@types/mdast@4.0.4)(micromark-util-types@2.0.2)(micromark@4.0.2)(react@19.2.7)(unified@11.0.5)
@@ -870,6 +873,11 @@ packages:
 
   '@drizzle-team/brocli@0.12.0':
     resolution: {integrity: sha512-mlUE+rZ8CatQekLhnaiN91Iemdd+e2gFKooGlnRB3oPTL3VghLfX24dx7HrzMNeC1JrIB/0kpsfyty3f5HNfxQ==}
+
+  '@electric-sql/pglite-pgvector@0.0.4':
+    resolution: {integrity: sha512-oHOQlYMzgxmoFWRbKhhoV0UNfoNUdbTHUD/z/nujr8LrUe4HdiSAUY2+Mv+Z033hZO9UWqOuj3Be2KztwK79ow==}
+    peerDependencies:
+      '@electric-sql/pglite': 0.5.3
 
   '@electric-sql/pglite@0.5.3':
     resolution: {integrity: sha512-iTTYbA5Uesrl+N7zss0J5LopT7KE4j9aymYo+EZZh+rZbARQCUQOs+n2pay64JRUpc3fCkpfrniTNJnvYzOE+g==}
@@ -6725,6 +6733,10 @@ snapshots:
   '@chevrotain/types@11.1.2': {}
 
   '@drizzle-team/brocli@0.12.0': {}
+
+  '@electric-sql/pglite-pgvector@0.0.4(@electric-sql/pglite@0.5.3)':
+    dependencies:
+      '@electric-sql/pglite': 0.5.3
 
   '@electric-sql/pglite@0.5.3': {}
 
