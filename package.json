@@ -16,12 +16,16 @@
     "preview": "vp preview",
     "lint": "vp lint",
     "fmt": "vp fmt",
-    "pwa-assets": "pwa-assets-generator --preset minimal-2023 public/logo.png",
     "patch:openrouter": "node scripts/patch-openrouter-sdk.mjs",
-    "auth": "pnpm dlx auth@latest generate --yes --output src/db"
+    "pwa-assets": "pwa-assets-generator --preset minimal-2023 public/logo.png",
+    "auth": "pnpm dlx auth@latest generate --yes --output src/db",
+    "clean": "rm -rf node_modules/.vite node_modules/.vite-temp",
+    "db:push": "drizzle-kit push",
+    "db:studio": "drizzle-kit studio"
   },
   "dependencies": {
     "@base-ui/react": "^1.6.0",
+    "@electric-sql/pglite": "^0.5.3",
     "@streamdown/cjk": "^1.0.3",
     "@streamdown/code": "^1.1.1",
     "@streamdown/math": "^1.0.2",
@@ -35,7 +39,6 @@
     "drizzle-orm": "1.0.0-rc.4",
     "katex": "^0.17.0",
     "nitro": "3.0.260610-beta",
-    "pg": "^8.22.0",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "srvx": "^0.11.18",

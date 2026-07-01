@@ -4,6 +4,7 @@ import { openRouterText } from "@tanstack/ai-openrouter";
 import { useChat, fetchServerSentEvents } from "@tanstack/ai-react";
 import type { UIMessage } from "@tanstack/ai-react";
 import { createFileRoute } from "@tanstack/react-router";
+import { createServerFn } from "@tanstack/react-start";
 import { useState } from "react";
 import IconBot from "~icons/lucide/bot";
 
@@ -14,6 +15,12 @@ import IconSquare from "~icons/lucide/square";
 
 import Markdown from "@/components/Markdown";
 import { m } from "@/paraglide/messages";
+
+const getUsers = createServerFn({ method: "GET" }).handler(async () => {
+  const { db } = await import("@/db");
+  const { usersTable } = await import("@/db/schema");
+  return await db.select().from(usersTable);
+});
 
 export const Route = createFileRoute("/")({
   component: RouteComponent,
@@ -39,9 +46,14 @@ export const Route = createFileRoute("/")({
       },
     },
   },
+  async loader() {
+    return await getUsers();
+  },
 });
 
 function RouteComponent() {
+  const data = Route.useLoaderData();
+
   const [input, setInput] = useState("");
   const { messages, sendMessage, isLoading, error, stop } = useChat({
     connection: fetchServerSentEvents("/"),
@@ -55,6 +67,7 @@ function RouteComponent() {
 
   return (
     <div className="mx-auto flex h-dvh max-w-2xl flex-col gap-4 p-4">
+      <p>{JSON.stringify(data)}</p>
       <div className="flex flex-1 flex-col overflow-y-auto">
         {messages.length === 0 && (
           <div className="text-base-content/50 m-auto flex flex-col items-center gap-2">

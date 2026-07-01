@@ -1,7 +1,6 @@
 allowBuilds:
   "@openrouter/sdk": true
   esbuild: true
-  libpq: false
   sharp: true
 
 minimumReleaseAge: 0

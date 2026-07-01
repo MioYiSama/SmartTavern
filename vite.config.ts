@@ -68,16 +68,10 @@ export default defineConfig({
       "shiki/wasm": "@shikijs/engine-oniguruma/wasm-inlined",
     },
   },
-  optimizeDeps: {
-    // `pg` lazily `require`s the native `pg-native`/`libpq` bindings, which
-    // can't be evaluated through Vite's SSR module runner. Keep the dep
-    // scanner/optimizer from ever following into them.
-    exclude: ["pg", "pg-native", "libpq"],
-  },
-  ssr: {
-    external: ["pg", "pg-native", "libpq"],
-  },
   server: {
+    port: 8000,
+  },
+  preview: {
     port: 8000,
   },
   build: {
