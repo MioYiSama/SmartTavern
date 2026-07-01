@@ -75,6 +75,12 @@ export default defineConfig({
   ],
   resolve: {
     tsconfigPaths: true,
+    alias: {
+      // shiki's `./wasm` export offers a raw `onig.wasm` (via the `unwasm`
+      // condition) that rolldown's wasm loader can't bundle. Point it at the
+      // JS-inlined oniguruma engine instead (shiki's own `default` fallback).
+      "shiki/wasm": "@shikijs/engine-oniguruma/wasm-inlined",
+    },
   },
   server: {
     port: 8000,

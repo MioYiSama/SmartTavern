@@ -16,7 +16,8 @@
     "preview": "vp preview",
     "lint": "vp lint",
     "fmt": "vp fmt",
-    "pwa-assets": "pwa-assets-generator --preset minimal-2023 public/logo.png"
+    "pwa-assets": "pwa-assets-generator --preset minimal-2023 public/logo.png",
+    "patch:openrouter": "node scripts/patch-openrouter-sdk.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.6.0",

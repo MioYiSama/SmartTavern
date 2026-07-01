@@ -5,4 +5,4 @@ allowBuilds:
 minimumReleaseAge: 0
 
 patchedDependencies:
-  "@openrouter/sdk@0.13.20": patches/@openrouter__sdk@0.13.20.patch
+  '@openrouter/sdk@0.13.20': patches/@openrouter__sdk@0.13.20.patch
