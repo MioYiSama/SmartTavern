@@ -37,16 +37,10 @@ export default defineConfig(() => ({
     rsc(),
     nitro({
       defaultPreset: "node-server",
-      compressPublicAssets: {
-        gzip: true,
-        zstd: true,
-      },
+      compressPublicAssets: { gzip: true, zstd: true },
       traceDeps: pgliteExternals,
     }),
-    Icons({
-      compiler: "jsx",
-      jsx: "react",
-    }),
+    Icons({ compiler: "jsx", jsx: "react" }),
     react(),
     babel({ presets: [reactCompilerPreset()] }) as any, // ts(2321)
     tanstackStartCookies(),
@@ -104,14 +98,14 @@ export default defineConfig(() => ({
     chunkSizeWarningLimit: Number.MAX_SAFE_INTEGER,
   },
   lint: {
-    ignorePatterns: ["src/routeTree.gen.ts", "SillyTavern"],
+    ignorePatterns: ["src/routeTree.gen.ts", "SillyTavern/**/*"],
     options: {
       typeAware: true,
       typeCheck: true,
     },
   },
   fmt: {
-    ignorePatterns: ["src/routeTree.gen.ts", "pnpm-lock.yaml", "SillyTavern"],
+    ignorePatterns: ["src/routeTree.gen.ts", "pnpm-lock.yaml", "SillyTavern/**/*"],
     sortImports: true,
     sortPackageJson: true,
     sortTailwindcss: true,
