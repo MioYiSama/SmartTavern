@@ -1,0 +1,39 @@
+# Dependencies (reinstalled inside the image)
+node_modules
+**/node_modules
+
+# Build output
+.output
+.tanstack
+.wrangler
+dist
+
+# Env & secrets
+.env
+.env.*
+!.env.example
+
+# Version control & CI
+.git
+.gitignore
+.github
+
+# Editor / IDE
+.vscode
+.idea
+*.swp
+
+# Docker
+docker
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Docs & misc
+README.md
+AGENTS.md
+CLAUDE.md
+LICENSE
+*.log
+data

@@ -1,41 +1,11 @@
-# Dependencies (reinstalled inside the image)
-node_modules
-**/node_modules
-
-# Build output
 .output
 .tanstack
-.wrangler
-dist
-
-# Env & secrets
-.env
-.env.*
-!.env.example
-
-# Version control & CI
-.git
-.gitignore
-.github
-
-# Editor / IDE
 .vscode
-.idea
-*.swp
-
-# Docker
-Dockerfile
-.dockerignore
-docker-compose.yml
-
-# OS files
+.wrangler
+node_modules
+.env
 .DS_Store
-Thumbs.db
-
-# Docs & misc
-README.md
-AGENTS.md
-CLAUDE.md
-LICENSE
-*.log
 data
+src/paraglide
+src/project.inlang/**/*
+!src/project.inlang/settings.json

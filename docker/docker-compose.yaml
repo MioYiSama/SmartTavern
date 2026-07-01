@@ -1,7 +1,11 @@
+name: smart-tavern
+
 services:
   smart-tavern:
     image: mioyisama/smart-tavern
-    build: .
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
 
     ports:
       - 8000:8000

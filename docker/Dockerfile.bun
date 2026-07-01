@@ -1,19 +1,26 @@
 FROM node:26-bookworm-slim AS build
 
+# Install ca-certificates
 RUN DEBIAN_FRONTEND=noninteractive \
     apt-get update && \
     apt-get install -y --no-install-recommends ca-certificates
+
+# Install corepack
 RUN npm install -g corepack@latest && corepack enable
 
+# Install dependencies
 WORKDIR /app
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY patches ./patches
 RUN --mount=type=cache,id=pnpm,target=/root/.local/share/pnpm/store \
     pnpm install --frozen-lockfile
 
+# Build app
 COPY . .
-RUN pnpm build
+RUN pnpm build:bun
 
-FROM gcr.io/distroless/nodejs26-debian13
+# Runtime
+FROM oven/bun:distroless
 
 WORKDIR /app
 COPY --from=build /app/.output .
@@ -21,6 +28,5 @@ COPY --from=build /app/.output .
 ENV NODE_ENV=production \
     HOST=0.0.0.0 \
     PORT=8000
-
 EXPOSE 8000
 CMD ["./server/index.mjs"]
