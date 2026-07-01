@@ -2,12 +2,14 @@
 
 SmartTavern 是 [SillyTavern](https://github.com/SillyTavern/SillyTavern)（当前锁定在 `1.18.0`）的重写版本。目标是在保留 SillyTavern 核心能力与生态兼容性的前提下，用现代技术栈消除历史技术债。
 
+> **访问模型**：SmartTavern 是一个**强制登录的多用户应用**。整个应用（包括所有页面与 API/server function）一律需要已认证会话才能访问，不存在任何匿名/公开路由。所有用户权限对等，**不设管理员角色**；用户之间数据**强隔离**，互不可见。详见 [architecture.md · 用户与权限模型](./architecture.md#用户与权限模型)。
+
 ## 文档索引
 
 | 文档                                 | 内容                                                        |
 | ------------------------------------ | ----------------------------------------------------------- |
 | [roadmap.md](./roadmap.md)           | **重构总路线图**：阶段划分、里程碑、验收标准                |
-| [architecture.md](./architecture.md) | 目标架构、分层、数据模型（DB schema 设计原则）              |
+| [architecture.md](./architecture.md) | 目标架构、分层、**用户与权限模型**、**AI 供应商层（BYOK）**、数据模型（DB schema 设计原则） |
 | [data-import.md](./data-import.md)   | **旧格式数据导入规范**：角色卡 / 聊天 / 世界书 / 预设等迁移 |
 
 ## 现状（Baseline）

@@ -8,6 +8,7 @@
 2. **不丢数据**：无法映射的字段保留到 `extensions` / `raw`。
 3. **幂等**：重复导入不产生重复或损坏（按内容 hash / 稳定 id 去重）。
 4. 支持两种入口：**单文件导入**（拖入一张角色卡/一个世界书）与**整目录/备份导入**（一个 ST 用户数据目录或备份包）。
+5. **归属当前用户**：导入只能在已登录会话内触发，所有写入挂当前会话 `user_id`；导入产物仅对该用户可见，他人不可见、不可查（参见 [architecture.md · 用户与权限模型](./architecture.md#用户与权限模型)）。
 
 ## 架构
 
@@ -18,7 +19,7 @@
 
 - `src/import/parsers/*`：每种格式一个纯函数解析器，输入 bytes/JSON，输出结构化对象。
 - `src/import/normalize/*`：字段升级与映射到规范模型（见 [architecture.md](./architecture.md#数据模型)）。
-- `src/import/persist/*`：写入 DB（事务、去重、关联建立）。
+- `src/import/persist/*`：写入 DB（事务、去重、关联建立）。**入参必含 `userId`**（取自会话），所有 insert 强制挂该 `user_id`，不在 persist 层之外暴露写入入口。
 - `src/import/__fixtures__/`：来自 `SillyTavern/default/content/` 的真实样本，驱动回归测试。
 
 ## 支持的格式
@@ -53,6 +54,7 @@
 
 - 角色：按 `name + character_version + 内容 hash` 去重；重复导入更新或跳过（可选策略）。
 - 聊天：按稳定来源标识（文件名/时间戳/hash）去重。
+- 新实体入库统一由 PG `uuidv7()` 生成主键（见 [architecture.md · ID 约定](./architecture.md#id-约定)）；去重依赖业务键（内容 hash / 稳定来源标识），不依赖主键本身。
 - 导入以事务提交；单条失败不污染整批（记录到导入报告）。
 
 ## 导入报告
@@ -64,6 +66,7 @@
 - **单测**：每个解析器对 fixture 断言关键字段；normalize 覆盖 V1/V2/V3 三条路径。
 - **快照**：解析 → 规范化后的规范模型做快照测试，防止映射漂移。
 - **回归**：schema 变更后跑全套 fixture 导入，防止映射退化。
+- **隔离回归**：导入到用户 A 后，以用户 B 会话查询同一实体必须返回空；B 触发导入写库的数据不会出现在 A 的结果集中。
 
 > 仅单向导入，不做导出/round-trip 对拍。
 

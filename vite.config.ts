@@ -14,6 +14,9 @@ import { defineConfig } from "vite-plus";
 const pgliteExternals = ["@electric-sql/pglite", "@electric-sql/pglite-pgvector"];
 
 export default defineConfig(() => ({
+  test: {
+    include: ["src/**/*.test.ts"],
+  },
   server: { port: 8000 },
   preview: { port: 8000 },
   resolve: {

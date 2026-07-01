@@ -1,6 +1,8 @@
 allowBuilds:
+  '@google/genai': true
   "@openrouter/sdk": true
   esbuild: true
+  protobufjs: true
   sharp: true
 
 minimumReleaseAge: 0
