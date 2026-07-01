@@ -4,6 +4,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  '@openrouter/sdk@0.13.20': aaa58277270421c2818eaaa04219c4c9792f0742c63de94f2128570cb3ee6d2c
+
 importers:
 
   .:
@@ -99,6 +102,9 @@ importers:
       babel-plugin-react-compiler:
         specifier: ^1.0.0
         version: 1.0.0
+      daisyui:
+        specifier: ^5.6.6
+        version: 5.6.6
       tailwindcss:
         specifier: ^4.3.2
         version: 4.3.2
@@ -2633,6 +2639,9 @@ packages:
 
   csstype@3.2.3:
     resolution: {integrity: sha512-z1HGKcYy2xA8AGQfwrn0PAy+PB7X/GSj3UVJW9qKyn43xWa+gl5nXmU4qqLMRzWVLFC8KusUX8T/0kCiOYpAIQ==}
+
+  daisyui@5.6.6:
+    resolution: {integrity: sha512-UFiuIZYucF7ylrnY3PT1SqwaEbVB10mqTZRyeRchZk0bud+HihYLLhXdxGDVmR/ftrM9G9YVr9FFPRVVIZJ5hA==}
 
   data-view-buffer@1.0.2:
     resolution: {integrity: sha512-EmKO5V3OLXh1rtK2wgXRansaK1/mtVdTUEiEI0W8RkvgT05kfxaH29PliLnpLP73yYO6142Q72QNa8Wx/A5CqQ==}
@@ -5285,7 +5294,7 @@ snapshots:
 
   '@oozcitak/util@10.0.0': {}
 
-  '@openrouter/sdk@0.13.20':
+  '@openrouter/sdk@0.13.20(patch_hash=aaa58277270421c2818eaaa04219c4c9792f0742c63de94f2128570cb3ee6d2c)':
     dependencies:
       zod: 4.4.3
 
@@ -5889,7 +5898,7 @@ snapshots:
 
   '@tanstack/ai-openrouter@0.15.6(@tanstack/ai@0.39.0)':
     dependencies:
-      '@openrouter/sdk': 0.13.20
+      '@openrouter/sdk': 0.13.20(patch_hash=aaa58277270421c2818eaaa04219c4c9792f0742c63de94f2128570cb3ee6d2c)
       '@tanstack/ai': 0.39.0
       '@tanstack/ai-utils': 0.3.1
 
@@ -6677,6 +6686,8 @@ snapshots:
   crypto-random-string@2.0.0: {}
 
   csstype@3.2.3: {}
+
+  daisyui@5.6.6: {}
 
   data-view-buffer@1.0.2:
     dependencies:

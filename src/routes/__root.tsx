@@ -36,10 +36,12 @@ export const Route = createRootRoute({
         rel: "icon",
         href: "/favicon.ico",
       },
-      {
-        rel: "manifest",
-        href: "/manifest.webmanifest",
-      },
+      import.meta.env.PROD
+        ? {
+            rel: "manifest",
+            href: "/manifest.webmanifest",
+          }
+        : undefined,
       {
         rel: "apple-touch-icon",
         href: "/public/apple-touch-icon-180x180.png",
@@ -47,7 +49,9 @@ export const Route = createRootRoute({
     ],
   }),
   component() {
-    void useRegisterSW();
+    if (import.meta.env.PROD) {
+      useRegisterSW();
+    }
 
     return (
       <html lang={getLocale()}>
@@ -59,15 +63,10 @@ export const Route = createRootRoute({
             <Outlet />
             <TanStackDevtools
               plugins={[
-                {
-                  name: "TanStack Router",
-                  render: <TanStackRouterDevtoolsPanel />,
-                },
+                { name: "TanStack Router", render: <TanStackRouterDevtoolsPanel /> },
                 aiDevtoolsPlugin(),
               ]}
-              eventBusConfig={{
-                connectToServerBus: true,
-              }}
+              eventBusConfig={{ connectToServerBus: true }}
             />
           </StrictMode>
           <Scripts />

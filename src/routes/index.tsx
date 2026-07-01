@@ -50,9 +50,9 @@ function RouteComponent() {
 
   return (
     <div className="mx-auto flex h-dvh max-w-2xl flex-col gap-4 p-4">
-      <div className="flex flex-1 flex-col gap-3 overflow-y-auto">
+      <div className="flex flex-1 flex-col overflow-y-auto">
         {messages.length === 0 && (
-          <div className="m-auto flex flex-col items-center gap-2 text-gray-400">
+          <div className="m-auto flex flex-col items-center gap-2 text-base-content/50">
             <IconMessageCircle className="size-8" />
             <p className="text-sm">{m.chat_empty_state()}</p>
           </div>
@@ -60,30 +60,22 @@ function RouteComponent() {
         {messages.map((message: UIMessage) => (
           <div
             key={message.id}
-            className={
-              message.role === "user"
-                ? "flex items-end justify-end gap-2"
-                : "flex items-end justify-start gap-2"
-            }
+            className={`chat ${message.role === "user" ? "chat-end" : "chat-start"}`}
           >
             {message.role !== "user" && (
-              <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-gray-100 text-gray-500">
-                <IconBot className="size-5" />
+              <div className="chat-image avatar avatar-placeholder">
+                <div className="size-8 rounded-full bg-neutral text-neutral-content">
+                  <IconBot className="size-5" />
+                </div>
               </div>
             )}
             <div
-              className={
-                message.role === "user"
-                  ? "max-w-[85%] rounded-2xl rounded-br-sm bg-blue-600 px-4 py-2 text-white"
-                  : "max-w-[85%] rounded-2xl rounded-bl-sm bg-gray-100 px-4 py-2 text-gray-900"
-              }
+              className={`chat-bubble whitespace-pre-wrap ${
+                message.role === "user" ? "chat-bubble-primary" : ""
+              }`}
             >
               {message.parts.map((part, i) =>
-                part.type === "text" ? (
-                  <span key={i} className="whitespace-pre-wrap">
-                    {part.content}
-                  </span>
-                ) : null,
+                part.type === "text" ? <span key={i}>{part.content}</span> : null,
               )}
             </div>
           </div>
@@ -91,12 +83,14 @@ function RouteComponent() {
       </div>
 
       {error && (
-        <div className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-600">{error.message}</div>
+        <div role="alert" className="alert alert-error alert-soft">
+          <span>{error.message}</span>
+        </div>
       )}
 
       <div className="flex items-center gap-2">
         <Input
-          className="h-11 flex-1 rounded-xl border border-gray-200 px-4 text-gray-900 outline-none focus-visible:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-500/30 disabled:opacity-60"
+          className="input flex-1"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => {
@@ -109,19 +103,12 @@ function RouteComponent() {
           placeholder={m.chat_input_placeholder()}
         />
         {isLoading ? (
-          <Button
-            onClick={stop}
-            className="flex h-11 cursor-pointer items-center gap-2 rounded-xl bg-gray-900 px-5 font-medium text-white hover:bg-gray-700"
-          >
+          <Button onClick={stop} className="btn btn-neutral">
             <IconSquare className="size-4" />
             {m.chat_stop()}
           </Button>
         ) : (
-          <Button
-            onClick={handleSubmit}
-            disabled={!input.trim()}
-            className="flex h-11 cursor-pointer items-center gap-2 rounded-xl bg-blue-600 px-5 font-medium text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
-          >
+          <Button onClick={handleSubmit} disabled={!input.trim()} className="btn btn-primary">
             <IconSend className="size-4" />
             {m.chat_send()}
           </Button>
