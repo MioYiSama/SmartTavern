@@ -14,8 +14,8 @@ const cjk = createCjkPlugin();
 // (<div> in <p>, <button> in <button>) and hydration errors. Render a plain
 // <img> instead, keeping Streamdown's default image styling.
 const components: Components = {
-  img: ({ node, alt, ...props }) => (
-    <img alt={alt ?? ""} className="my-4 max-w-full rounded-lg" {...props} />
+  img: ({ node: _node, alt, ...props }) => (
+    <img alt={alt} className="my-4 max-w-full rounded-lg" {...props} />
   ),
 };
 

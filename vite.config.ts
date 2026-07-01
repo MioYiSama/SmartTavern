@@ -5,6 +5,7 @@ import { devtools } from "@tanstack/devtools-vite";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import react, { reactCompilerPreset } from "@vitejs/plugin-react";
 import rsc from "@vitejs/plugin-rsc";
+import { tanstackStartCookies } from "better-auth/tanstack-start";
 import { nitro } from "nitro/vite";
 import Icons from "unplugin-icons/vite";
 import { VitePWA } from "vite-plugin-pwa";
@@ -31,6 +32,7 @@ export default defineConfig({
     }),
     react(),
     babel({ presets: [reactCompilerPreset()] }),
+    tanstackStartCookies(),
     VitePWA({
       registerType: "autoUpdate",
       strategies: "generateSW",
@@ -65,6 +67,15 @@ export default defineConfig({
     alias: {
       "shiki/wasm": "@shikijs/engine-oniguruma/wasm-inlined",
     },
+  },
+  optimizeDeps: {
+    // `pg` lazily `require`s the native `pg-native`/`libpq` bindings, which
+    // can't be evaluated through Vite's SSR module runner. Keep the dep
+    // scanner/optimizer from ever following into them.
+    exclude: ["pg", "pg-native", "libpq"],
+  },
+  ssr: {
+    external: ["pg", "pg-native", "libpq"],
   },
   server: {
     port: 8000,

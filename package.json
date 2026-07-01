@@ -17,7 +17,8 @@
     "lint": "vp lint",
     "fmt": "vp fmt",
     "pwa-assets": "pwa-assets-generator --preset minimal-2023 public/logo.png",
-    "patch:openrouter": "node scripts/patch-openrouter-sdk.mjs"
+    "patch:openrouter": "node scripts/patch-openrouter-sdk.mjs",
+    "auth": "pnpm dlx auth@latest generate --yes --output src/db"
   },
   "dependencies": {
     "@base-ui/react": "^1.6.0",
@@ -30,8 +31,11 @@
     "@tanstack/ai-react": "^0.16.1",
     "@tanstack/react-router": "^1.170.16",
     "@tanstack/react-start": "^1.168.26",
+    "better-auth": "^1.6.23",
+    "drizzle-orm": "1.0.0-rc.4",
     "katex": "^0.17.0",
     "nitro": "3.0.260610-beta",
+    "pg": "^8.22.0",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "srvx": "^0.11.18",
@@ -53,6 +57,7 @@
     "@tanstack/react-router-devtools": "^1.167.0",
     "@types/babel__core": "^7.20.5",
     "@types/node": "^26.0.1",
+    "@types/pg": "^8.20.0",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
     "@vite-pwa/assets-generator": "^1.0.2",
@@ -60,6 +65,7 @@
     "@vitejs/plugin-rsc": "^0.5.27",
     "babel-plugin-react-compiler": "^1.0.0",
     "daisyui": "^5.6.6",
+    "drizzle-kit": "1.0.0-rc.4",
     "tailwindcss": "^4.3.2",
     "typescript": "^6.0.3",
     "unplugin-icons": "^23.0.1",
