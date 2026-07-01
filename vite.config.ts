@@ -14,7 +14,7 @@ export default defineConfig({
   plugins: [
     devtools(),
     paraglideVitePlugin({
-      project: "./project.inlang",
+      project: "./src/project.inlang",
       outdir: "./src/paraglide",
       strategy: ["preferredLanguage", "baseLocale"],
     }),

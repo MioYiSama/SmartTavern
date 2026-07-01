@@ -47,14 +47,7 @@ export const Route = createRootRoute({
     ],
   }),
   component() {
-    useRegisterSW({
-      onRegisteredSW(url) {
-        console.log("SW 注册成功", url);
-      },
-      onRegisterError(error) {
-        console.error("SW 注册失败", error);
-      },
-    });
+    void useRegisterSW();
 
     return (
       <html lang={getLocale()}>
