@@ -3,7 +3,6 @@ import { TanStackDevtools } from "@tanstack/react-devtools";
 import { Outlet, createRootRoute, HeadContent, Scripts, redirect } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { StrictMode } from "react";
-import { useRegisterSW } from "virtual:pwa-register/react";
 
 import { getLocale, shouldRedirect } from "@/paraglide/runtime";
 
@@ -22,11 +21,11 @@ export const Route = createRootRoute({
   head: () => ({
     meta: [
       {
-        charSet: "utf-8",
-      },
-      {
         name: "viewport",
         content: "width=device-width, initial-scale=1",
+      },
+      {
+        charSet: "utf-8",
       },
       {
         title: "SmartTavern",
@@ -57,11 +56,8 @@ export const Route = createRootRoute({
       },
     ],
   }),
+  scripts: () => (import.meta.env.PROD ? [{ src: "/registerSW.js" }] : []),
   component() {
-    if (import.meta.env.PROD) {
-      useRegisterSW();
-    }
-
     return (
       <html lang={getLocale()}>
         <head>

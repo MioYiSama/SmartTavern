@@ -11,7 +11,17 @@ import Icons from "unplugin-icons/vite";
 import { VitePWA } from "vite-plugin-pwa";
 import { defineConfig } from "vite-plus";
 
-export default defineConfig({
+const pgliteExternals = ["@electric-sql/pglite", "@electric-sql/pglite-pgvector"];
+
+export default defineConfig(() => ({
+  server: { port: 8000 },
+  preview: { port: 8000 },
+  resolve: {
+    tsconfigPaths: true,
+    alias: {
+      "shiki/wasm": "@shikijs/engine-oniguruma/wasm-inlined",
+    },
+  },
   plugins: [
     devtools(),
     paraglideVitePlugin({
@@ -25,18 +35,25 @@ export default defineConfig({
       importProtection: { behavior: "error" },
     }),
     rsc(),
-    nitro({ defaultPreset: "node-server" }),
+    nitro({
+      defaultPreset: "node-server",
+      compressPublicAssets: {
+        gzip: true,
+        zstd: true,
+      },
+      traceDeps: pgliteExternals,
+    }),
     Icons({
       compiler: "jsx",
       jsx: "react",
     }),
     react(),
-    babel({ presets: [reactCompilerPreset()] }) as any,
+    babel({ presets: [reactCompilerPreset()] }) as any, // ts(2321)
     tanstackStartCookies(),
-    VitePWA({
+    ...VitePWA({
       registerType: "autoUpdate",
       strategies: "generateSW",
-      injectRegister: null,
+      injectRegister: "script",
       outDir: ".output/public",
       workbox: {
         navigateFallback: undefined,
@@ -60,27 +77,31 @@ export default defineConfig({
           },
         ],
       },
-    }),
+    }).map((plugin) => ({
+      ...plugin,
+      applyToEnvironment: (
+        environment: Parameters<NonNullable<typeof plugin.applyToEnvironment>>[0],
+      ) => environment.name === "client",
+    })),
   ],
-  resolve: {
-    tsconfigPaths: true,
-    alias: {
-      "shiki/wasm": "@shikijs/engine-oniguruma/wasm-inlined",
+  environments: {
+    rsc: {
+      resolve: {
+        external: pgliteExternals,
+      },
     },
-  },
-  server: {
-    port: 8000,
-  },
-  preview: {
-    port: 8000,
+    ssr: {
+      resolve: {
+        external: pgliteExternals,
+      },
+    },
   },
   optimizeDeps: {
-    exclude: ["@electric-sql/pglite"],
+    exclude: pgliteExternals,
   },
   build: {
-    modulePreload: {
-      polyfill: false,
-    },
+    modulePreload: { polyfill: false },
+    chunkSizeWarningLimit: Number.MAX_SAFE_INTEGER,
   },
   lint: {
     ignorePatterns: ["src/routeTree.gen.ts", "SillyTavern"],
@@ -95,4 +116,4 @@ export default defineConfig({
     sortPackageJson: true,
     sortTailwindcss: true,
   },
-});
+}));

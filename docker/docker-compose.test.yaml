@@ -1,0 +1,29 @@
+name: smart-tavern-test
+
+services:
+  node:
+    image: mioyisama/smart-tavern:latest
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: node
+    ports:
+      - 8000:8000
+
+  deno:
+    image: mioyisama/smart-tavern:deno
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.deno
+    container_name: deno
+    ports:
+      - 8001:8000
+
+  bun:
+    image: mioyisama/smart-tavern:bun
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.bun
+    container_name: bun
+    ports:
+      - 8002:8000
