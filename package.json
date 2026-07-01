@@ -14,7 +14,7 @@
     "build:cf": "NITRO_PRESET=cloudflare_module vp build",
     "build:docker": "docker build -t mioyisama/smart-tavern .",
     "preview": "vp preview",
-    "lint": "vp lint",
+    "check": "vp check",
     "fmt": "vp fmt",
     "patch:openrouter": "node scripts/patch-openrouter-sdk.mjs",
     "pwa-assets": "pwa-assets-generator --preset minimal-2023 public/logo.png",

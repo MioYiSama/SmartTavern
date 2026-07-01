@@ -80,14 +80,14 @@ export default defineConfig({
     },
   },
   lint: {
-    ignorePatterns: ["src/routeTree.gen.ts"],
+    ignorePatterns: ["src/routeTree.gen.ts", "SillyTavern"],
     options: {
       typeAware: true,
       typeCheck: true,
     },
   },
   fmt: {
-    ignorePatterns: ["src/routeTree.gen.ts", "pnpm-lock.yaml"],
+    ignorePatterns: ["src/routeTree.gen.ts", "pnpm-lock.yaml", "SillyTavern"],
     sortImports: true,
     sortPackageJson: true,
     sortTailwindcss: true,

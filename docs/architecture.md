@@ -25,17 +25,17 @@
 
 ## 存储策略
 
-| 数据 | ST 旧存储 | SmartTavern |
-| --- | --- | --- |
-| 角色 | `characters/*.png`（内嵌 JSON） | `characters` 表 + 头像存文件系统 |
-| 聊天 | `chats/**/*.jsonl` | `chats` + `messages` 表 |
-| 世界书 | `worlds/*.json` | `lorebooks` + `lorebook_entries` |
-| 人设 | `User Avatars/` + settings | `personas` 表 |
-| 预设 | `OpenAI Settings/` 等目录 | `presets` 表（含 `kind`） |
-| 分组 | `groups/*.json` + `group chats/` | `groups` + 关联表 |
-| 设置 | `settings.json` | `settings` 表（JSONB + 版本） |
-| 密钥 | `secrets.json` | `secrets` 表（加密） |
-| 二进制（头像/背景/精灵） | 各目录文件 | 文件系统 `data/fs/<user>/…` + DB 引用 |
+| 数据                     | ST 旧存储                        | SmartTavern                           |
+| ------------------------ | -------------------------------- | ------------------------------------- |
+| 角色                     | `characters/*.png`（内嵌 JSON）  | `characters` 表 + 头像存文件系统      |
+| 聊天                     | `chats/**/*.jsonl`               | `chats` + `messages` 表               |
+| 世界书                   | `worlds/*.json`                  | `lorebooks` + `lorebook_entries`      |
+| 人设                     | `User Avatars/` + settings       | `personas` 表                         |
+| 预设                     | `OpenAI Settings/` 等目录        | `presets` 表（含 `kind`）             |
+| 分组                     | `groups/*.json` + `group chats/` | `groups` + 关联表                     |
+| 设置                     | `settings.json`                  | `settings` 表（JSONB + 版本）         |
+| 密钥                     | `secrets.json`                   | `secrets` 表（加密）                  |
+| 二进制（头像/背景/精灵） | 各目录文件                       | 文件系统 `data/fs/<user>/…` + DB 引用 |
 
 **数据根布局**：`data/` 下分两块，互不干扰、可分别备份/挂载卷：
 
@@ -63,19 +63,24 @@ data/
 以 **角色卡 V3 规范**为超集设计内部规范模型（canonical model），向下兼容 V1/V2。核心实体（字段最终以 Drizzle schema 为准）：
 
 ### characters
+
 V3 超集：`name` · `description` · `personality` · `scenario` · `first_mes` · `mes_example` · `creator_notes` · `system_prompt` · `post_history_instructions` · `alternate_greetings[]` · `tags[]` · `creator` · `character_version` · `avatar(blobRef)` · `character_book(fk→lorebooks, 可选)` · `assets[]` · `extensions(jsonb)` · `raw(jsonb, 原始卡备份)`。
 
 ### chats / messages
+
 - `chats`：关联 character 或 group、标题、时间、`metadata(jsonb)`。
 - `messages`：`role`(user/assistant/system) · `content` · `swipes[]` · `swipe_id` · `name` · `extra(jsonb)` · `created_at`。取代 jsonl 逐行结构，保留原 ST 消息扩展字段。
 
 ### lorebooks / lorebook_entries
+
 - entry：`keys[]` · `secondary_keys[]` · `content` · `constant` · `selective` · `insertion_order` · `position` · `depth` · `probability` · `enabled` · `extensions(jsonb)`。对齐 ST WI entry 结构，供 WI 引擎消费。
 
 ### 其它
+
 `personas` · `presets(kind: openai|textgen|instruct|context|sysprompt|reasoning|quickreply)` · `groups` + `group_members` · `settings(user_id, key, value jsonb, version)` · `secrets(user_id, provider, ciphertext)` · `assets(blob 元数据)`。
 
 ### 关系
+
 - 用户隔离：所有实体挂 `user_id`（Better Auth user）。ST 是每用户目录，这里是每用户行级隔离。
 - 世界书可绑定到角色（内嵌 book）或作为全局/聊天级独立库。
 

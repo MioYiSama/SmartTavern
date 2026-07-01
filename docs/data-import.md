@@ -23,21 +23,21 @@
 
 ## 支持的格式
 
-| 数据类型 | 来源格式 | ST 参考 | 要点 |
-| --- | --- | --- | --- |
-| 角色卡 | PNG（内嵌 `tEXt`） | `src/character-card-parser.js` | 读 `ccv3`(优先)→`chara`(V2)，base64 解码为 JSON |
-| 角色卡 | JSON | — | 直接 V1/V2/V3 JSON |
-| 角色卡 | CHARX（zip） | `src/charx.js` | 卡 + 资源打包 |
-| 角色卡 | BYAF（Backyard AI） | `src/byaf.js` | 第三方格式 |
-| 聊天 | `.jsonl`（逐行） | `src/endpoints/chats.js` | 首行元数据 + 每行一条消息；含 swipes/extra |
-| 群聊 | `group chats/*.jsonl` | `src/endpoints/groups.js` | 关联多角色 |
-| 世界书 | `worlds/*.json` | `src/endpoints/worldinfo.js` | `entries` 映射；也可能内嵌于角色卡 `character_book` |
-| 人设 | `User Avatars/` + `settings.json` | `src/endpoints/avatars.js` | 头像 + persona 描述与注入位置 |
-| 预设 | `OpenAI/TextGen/NovelAI/Kobold Settings/`、`instruct/`、`context/`、`sysprompt/`、`reasoning/`、`QuickReplies/` | `src/endpoints/presets.js` | 按 `kind` 分类导入 |
-| 分组 | `groups/*.json` | `src/endpoints/groups.js` | 成员 + 触发策略 |
-| 设置 | `settings.json` | `src/endpoints/settings.js` | 拆分为结构化 `settings` 行 |
-| 密钥 | `secrets.json` | `src/secrets.js` | 加密后写入 `secrets` 表 |
-| 主题/背景/资源 | `themes/`、`backgrounds/`、`assets/` | `src/endpoints/*` | 二进制 → `data/fs`；DB 存路径引用 |
+| 数据类型       | 来源格式                                                                                                        | ST 参考                        | 要点                                                |
+| -------------- | --------------------------------------------------------------------------------------------------------------- | ------------------------------ | --------------------------------------------------- |
+| 角色卡         | PNG（内嵌 `tEXt`）                                                                                              | `src/character-card-parser.js` | 读 `ccv3`(优先)→`chara`(V2)，base64 解码为 JSON     |
+| 角色卡         | JSON                                                                                                            | —                              | 直接 V1/V2/V3 JSON                                  |
+| 角色卡         | CHARX（zip）                                                                                                    | `src/charx.js`                 | 卡 + 资源打包                                       |
+| 角色卡         | BYAF（Backyard AI）                                                                                             | `src/byaf.js`                  | 第三方格式                                          |
+| 聊天           | `.jsonl`（逐行）                                                                                                | `src/endpoints/chats.js`       | 首行元数据 + 每行一条消息；含 swipes/extra          |
+| 群聊           | `group chats/*.jsonl`                                                                                           | `src/endpoints/groups.js`      | 关联多角色                                          |
+| 世界书         | `worlds/*.json`                                                                                                 | `src/endpoints/worldinfo.js`   | `entries` 映射；也可能内嵌于角色卡 `character_book` |
+| 人设           | `User Avatars/` + `settings.json`                                                                               | `src/endpoints/avatars.js`     | 头像 + persona 描述与注入位置                       |
+| 预设           | `OpenAI/TextGen/NovelAI/Kobold Settings/`、`instruct/`、`context/`、`sysprompt/`、`reasoning/`、`QuickReplies/` | `src/endpoints/presets.js`     | 按 `kind` 分类导入                                  |
+| 分组           | `groups/*.json`                                                                                                 | `src/endpoints/groups.js`      | 成员 + 触发策略                                     |
+| 设置           | `settings.json`                                                                                                 | `src/endpoints/settings.js`    | 拆分为结构化 `settings` 行                          |
+| 密钥           | `secrets.json`                                                                                                  | `src/secrets.js`               | 加密后写入 `secrets` 表                             |
+| 主题/背景/资源 | `themes/`、`backgrounds/`、`assets/`                                                                            | `src/endpoints/*`              | 二进制 → `data/fs`；DB 存路径引用                   |
 
 > ST 每用户目录结构见 `SillyTavern/src/constants.js` 的 `USER_DIRECTORY_TEMPLATE`。
 
