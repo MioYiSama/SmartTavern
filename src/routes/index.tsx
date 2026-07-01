@@ -7,10 +7,13 @@ import type { UIMessage } from "@tanstack/ai-react";
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import IconBot from "~icons/lucide/bot";
+
+import "katex/dist/katex.min.css";
 import IconMessageCircle from "~icons/lucide/message-circle";
 import IconSend from "~icons/lucide/send";
 import IconSquare from "~icons/lucide/square";
 
+import Markdown from "@/components/Markdown";
 import { m } from "@/paraglide/messages";
 
 export const Route = createFileRoute("/")({
@@ -18,15 +21,18 @@ export const Route = createFileRoute("/")({
   server: {
     handlers: {
       POST: async ({ request }) => {
-        console.log(process.env["OPENROUTER_API_KEY"]);
-
         const abortController = new AbortController();
         const { messages } = await request.json();
 
         const stream = chat({
           adapter: openRouterText("deepseek/deepseek-v4-flash"),
           messages,
-          systemPrompts: ["You are a helpful assistant."],
+          systemPrompts: [
+            "You are a helpful assistant. When writing mathematical expressions, always use KaTeX-compatible delimiters: `$...$` for inline math and `$$...$$` for display math. Do not use `\\( \\)` or `\\[ \\]`.",
+          ],
+          modelOptions: {
+            reasoning: { effort: "medium" },
+          },
           abortController,
         });
 
@@ -44,7 +50,7 @@ function RouteComponent() {
 
   const handleSubmit = () => {
     if (!input.trim()) return;
-    sendMessage(input.trim());
+    void sendMessage(input.trim());
     setInput("");
   };
 
@@ -52,34 +58,51 @@ function RouteComponent() {
     <div className="mx-auto flex h-dvh max-w-2xl flex-col gap-4 p-4">
       <div className="flex flex-1 flex-col overflow-y-auto">
         {messages.length === 0 && (
-          <div className="m-auto flex flex-col items-center gap-2 text-base-content/50">
+          <div className="text-base-content/50 m-auto flex flex-col items-center gap-2">
             <IconMessageCircle className="size-8" />
             <p className="text-sm">{m.chat_empty_state()}</p>
           </div>
         )}
-        {messages.map((message: UIMessage) => (
-          <div
-            key={message.id}
-            className={`chat ${message.role === "user" ? "chat-end" : "chat-start"}`}
-          >
-            {message.role !== "user" && (
-              <div className="chat-image avatar avatar-placeholder">
-                <div className="size-8 rounded-full bg-neutral text-neutral-content">
-                  <IconBot className="size-5" />
+        {messages.map((message: UIMessage, idx) => {
+          const isUser = message.role === "user";
+          const thinkingParts = message.parts.filter((p) => p.type === "thinking");
+          const text = message.parts.map((p) => (p.type === "text" ? p.content : "")).join("");
+          const hasText = text.length > 0;
+          const isStreaming = isLoading && idx === messages.length - 1 && !isUser;
+          const mode = isStreaming ? "streaming" : "static";
+          return (
+            <div key={message.id} className="flex flex-col gap-1">
+              {thinkingParts.map((part, i) => (
+                <details
+                  key={i}
+                  open={!hasText}
+                  className="bg-base-200 collapse-arrow rounded-box text-base-content/70 collapse text-sm"
+                >
+                  <summary className="collapse-title font-medium">
+                    {hasText ? m.chat_thinking_done() : m.chat_thinking()}
+                  </summary>
+                  <div className="collapse-content">
+                    <Markdown mode={mode} content={part.content} />
+                  </div>
+                </details>
+              ))}
+              {(hasText || thinkingParts.length === 0) && (
+                <div className={`chat ${isUser ? "chat-end" : "chat-start"}`}>
+                  {!isUser && (
+                    <div className="chat-image avatar avatar-placeholder">
+                      <div className="bg-neutral text-neutral-content size-8 rounded-full">
+                        <IconBot className="size-5" />
+                      </div>
+                    </div>
+                  )}
+                  <div className={`chat-bubble ${isUser ? "chat-bubble-primary" : ""}`}>
+                    <Markdown mode={mode} content={text} />
+                  </div>
                 </div>
-              </div>
-            )}
-            <div
-              className={`chat-bubble whitespace-pre-wrap ${
-                message.role === "user" ? "chat-bubble-primary" : ""
-              }`}
-            >
-              {message.parts.map((part, i) =>
-                part.type === "text" ? <span key={i}>{part.content}</span> : null,
               )}
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       {error && (

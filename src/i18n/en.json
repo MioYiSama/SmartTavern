@@ -3,5 +3,7 @@
   "chat_empty_state": "Ask me anything to get started.",
   "chat_input_placeholder": "Type a message...",
   "chat_send": "Send",
-  "chat_stop": "Stop"
+  "chat_stop": "Stop",
+  "chat_thinking": "Thinking...",
+  "chat_thinking_done": "Thought process"
 }

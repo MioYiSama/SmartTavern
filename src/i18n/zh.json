@@ -3,5 +3,7 @@
   "chat_empty_state": "向我提问，开始对话吧。",
   "chat_input_placeholder": "输入消息……",
   "chat_send": "发送",
-  "chat_stop": "停止"
+  "chat_stop": "停止",
+  "chat_thinking": "思考中……",
+  "chat_thinking_done": "思考过程"
 }
