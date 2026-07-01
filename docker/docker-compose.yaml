@@ -7,5 +7,17 @@ services:
       context: ..
       dockerfile: docker/Dockerfile
 
+    container_name: smart-tavern
+    environment:
+      - BETTER_AUTH_URL=http://localhost:8000
+      - BETTER_AUTH_SECRET=example
+
     ports:
       - 8000:8000
+
+    volumes:
+      - data:/app/data
+
+volumes:
+  data:
+    name: smart-tavern-data

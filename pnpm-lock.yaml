@@ -39,8 +39,8 @@ importers:
         specifier: ^0.15.6
         version: 0.15.6(@tanstack/ai@0.39.0)
       '@tanstack/ai-react':
-        specifier: ^0.16.1
-        version: 0.16.1(@tanstack/ai@0.39.0)(@types/react@19.2.17)(react@19.2.7)
+        specifier: ^0.16.2
+        version: 0.16.2(@tanstack/ai@0.39.0)(@types/react@19.2.17)(react@19.2.7)
       '@tanstack/react-router':
         specifier: ^1.170.16
         version: 1.170.16(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
@@ -2269,8 +2269,8 @@ packages:
     peerDependencies:
       '@tanstack/ai': ^0.39.0
 
-  '@tanstack/ai-react@0.16.1':
-    resolution: {integrity: sha512-/eWlBJ8OR4C8t9hGC/iwojghiBVaanRP2V4r88G4TVGN7i1AR0u1uzjnb/WNXKwdOTV1Ag4zvx5aaUaYR2a1Gw==}
+  '@tanstack/ai-react@0.16.2':
+    resolution: {integrity: sha512-Ixa6UymQvjVhz3S9as1MT/zLRXdvAAPULghtFq/ONeSwLI9jMm2zq5pTRZnSkrKq+Shgc72dzpatd53CIZ/ZkQ==}
     peerDependencies:
       '@mcp-ui/client': ^7
       '@tanstack/ai': ^0.39.0
@@ -4832,8 +4832,8 @@ packages:
   package-json-from-dist@1.0.1:
     resolution: {integrity: sha512-UEZIS3/by4OC8vL3P2dTXRETpebLI2NiI5vIrjaD/5UtrkFX/tNbwjTSRAGC/+7CAo2pIcBaRgWmcBBHcsaCIw==}
 
-  package-manager-detector@1.6.0:
-    resolution: {integrity: sha512-61A5ThoTiDG/C8s8UMZwSorAGwMJ0ERVGj2OjoW5pAalsNOg15+iQiPzrLJ4jhZ1HJzmC2PIHT2oEiH3R5fzNA==}
+  package-manager-detector@1.7.0:
+    resolution: {integrity: sha512-xg1eHpwYL/D/HEdWw2goFZP6vV0FH7W+PZ5rFkGjdIDLtxq7EkzBUeT3m+lndYCt8wKbmofUu1MUdMCXkCk9ZQ==}
 
   parent-module@1.0.1:
     resolution: {integrity: sha512-GQ2EWRpQV8/o+Aw8YqtfZZPfNRWZYkbidE9k5rpl/hC3vtHHBfGm2Ifi6qWV+coDGkrUKZAxE3Lot5kcsRlh+g==}
@@ -5882,7 +5882,7 @@ snapshots:
 
   '@antfu/install-pkg@1.1.0':
     dependencies:
-      package-manager-detector: 1.6.0
+      package-manager-detector: 1.7.0
       tinyexec: 1.2.4
 
   '@apideck/better-ajv-errors@0.3.7(ajv@8.20.0)':
@@ -7728,7 +7728,7 @@ snapshots:
       '@tanstack/ai': 0.39.0
       '@tanstack/ai-utils': 0.3.1
 
-  '@tanstack/ai-react@0.16.1(@tanstack/ai@0.39.0)(@types/react@19.2.17)(react@19.2.7)':
+  '@tanstack/ai-react@0.16.2(@tanstack/ai@0.39.0)(@types/react@19.2.17)(react@19.2.7)':
     dependencies:
       '@tanstack/ai': 0.39.0
       '@tanstack/ai-client': 0.19.1
@@ -10519,7 +10519,7 @@ snapshots:
 
   package-json-from-dist@1.0.1: {}
 
-  package-manager-detector@1.6.0: {}
+  package-manager-detector@1.7.0: {}
 
   parent-module@1.0.1:
     dependencies:

@@ -17,16 +17,18 @@ RUN --mount=type=cache,id=pnpm,target=/root/.local/share/pnpm/store \
 
 # Build app
 COPY . .
-RUN pnpm build
+RUN pnpm run db:generate && pnpm run build
 
 # Runtime
 FROM gcr.io/distroless/nodejs26-debian13
 
 WORKDIR /app
 COPY --from=build /app/.output .
+COPY --from=build /app/drizzle ./drizzle
 
 ENV NODE_ENV=production \
     HOST=0.0.0.0 \
     PORT=8000
 EXPOSE 8000
+VOLUME [ "/app/data" ]
 CMD ["./server/index.mjs"]

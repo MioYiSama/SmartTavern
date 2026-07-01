@@ -6,7 +6,9 @@ services:
     build:
       context: ..
       dockerfile: docker/Dockerfile
-    container_name: node
+
+    container_name: smart-tavern-node
+
     ports:
       - 8000:8000
 
@@ -15,7 +17,9 @@ services:
     build:
       context: ..
       dockerfile: docker/Dockerfile.deno
-    container_name: deno
+
+    container_name: smart-tavern-deno
+
     ports:
       - 8001:8000
 
@@ -24,6 +28,8 @@ services:
     build:
       context: ..
       dockerfile: docker/Dockerfile.bun
-    container_name: bun
+
+    container_name: smart-tavern-bun
+
     ports:
       - 8002:8000

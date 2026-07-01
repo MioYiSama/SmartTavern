@@ -9,3 +9,4 @@ data
 src/paraglide
 src/project.inlang/**/*
 !src/project.inlang/settings.json
+drizzle

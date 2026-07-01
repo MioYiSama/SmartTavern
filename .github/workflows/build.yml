@@ -15,7 +15,7 @@ jobs:
           runtime: node@26
           cache: true
 
-      - run: pnpm run build
+      - run: pnpm run db:generate && pnpm run build && mv drizzle .output/
 
       - uses: actions/upload-artifact@v7
         with:
